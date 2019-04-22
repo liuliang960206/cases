@@ -1,5 +1,3 @@
-// 112233哈哈哈
-
 const before1 = document.getElementById('before1');
 const before2 = document.getElementById('before2');
 const after1 = document.getElementById('after1');
