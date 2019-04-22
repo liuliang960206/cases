@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <button>按钮（0）</button>
+    <button>按钮（0）</button>
+    <button>按钮（0）</button>
+    <button>按钮（0）</button>
+    <script>
+        //需求：当前页面的四个按钮，每点击一下，数字累加1，加到2则该按钮禁用
+        const btns = document.querySelectorAll('button');
+        console.dir(btns);
+        for (let i = 0; i < btns.length; i++) {
+            btns[i].num = 0;
+            btns[i].onclick = function () {
+                if (this.num < 2) {
+                    this.num++;
+                    this.innerHTML = '按钮（' + this.num + '）';
+                    if (this.num === 2) {
+                        this.disabled = true;
+                    };
+                };
+            };
+        };
+
+
+    </script>
+</body>
+
+</html>

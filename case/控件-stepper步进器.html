@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="box">
+        <p>单价：<span>10</span>元</p>
+        <button>-</button>
+        <span>0</span>
+        <button>+</button>
+        <p><span>总价：9.9元</span></p>
+    </div>
+    <script>
+        const btns = document.querySelectorAll('#box>button');
+        const spans = document.querySelectorAll('#box span');
+        let num = 0;
+        btns[1].onclick = function () {
+            num++;
+            fn();
+        };
+        btns[0].onclick = function () {
+            num--;
+            num < 0 ? num = 0 : null;
+            fn();
+        };
+        function fn(){
+            spans[1].innerHTML = num;
+            let total = spans[0].innerHTML * num
+            spans[2].innerHTML = '总价:' + total.toFixed(1) + '元';  
+        }
+    </script>
+</body>
+
+</html>

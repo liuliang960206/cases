@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" id="link"/>
+    <style>
+        .red {
+            background-color: red;
+        }
+        .blue {
+            background-color: blue;
+        }
+    </style>
+</head>
+
+<body>
+    <button>红色皮肤</button>
+    <button>蓝色皮肤</button>
+    <script>
+        const btn = document.getElementsByTagName('button');
+        btn[0].onclick = function(){
+            // link.href = '1.css';
+            // document.body.style.backgroundColor = 'red';
+            document.body.className = 'red'
+        }
+        btn[1].onclick = function(){
+            // link.href = '2.css';
+            // document.body.style.backgroundColor = 'blue';
+            document.body.className = 'blue';
+        }
+    </script>
+</body>
+
+</html>

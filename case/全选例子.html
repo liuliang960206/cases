@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #ul>li {
+            list-style: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        全选 :<input type="radio" name="r" id="radio">
+    </div>
+    <ul id="ul">
+        <!-- <li><input type="checkbox" /></li>
+        <li><input type="checkbox" /></li>
+        <li><input type="checkbox" checked/></li> -->
+    </ul>
+    <script>
+        const ul = document.getElementById('ul');
+        const radio = document.getElementById('radio');
+
+
+        let num = [1, 2, 3, 4, 5, 6, 7];
+        function fn(num) {
+            let html = '';
+            num.forEach(function (item, i) {
+                html += `<li><input type="checkbox" }/>${item}</li>`
+            });
+            ul.innerHTML = html;
+        };
+        fn(num);
+
+        const inputs = document.querySelectorAll('#ul>li>input');
+        console.log(inputs);
+
+        let onOff = true;
+        radio.onclick = function () {
+            if (onOff) {
+                for (let i = 0; i < inputs.length; i++) {
+                    inputs[i].checked = true;
+                }
+            } else {
+                radio.checked = false;
+                for (let i = 0; i < inputs.length; i++) {
+                    inputs[i].checked = false;
+                }
+            }
+            onOff = !onOff
+        }
+
+
+    </script>
+</body>
+
+</html>

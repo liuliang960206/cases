@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .box {
+            width: 350px;
+            margin: 20px auto;
+            border: 1px solid #333;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .box p {
+            font-size: 20px;
+        }
+
+        .box p span {
+            color: red;
+            font-weight: 700;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="box" class="box">
+        <p>
+            距离开抢还有
+            <span id="timeBox">01天 03:16:27</span>
+        </p>
+    </div>
+
+    <script>
+        let timeBox = document.getElementById('timeBox');
+        function fn() {
+            let nowTime = new Date(); //当前时间
+            let tarTime = new Date('2019/05/01 00:00:00'); //指定未来时间
+            let diffTime = (tarTime - nowTime) / 1000; //时间差(秒) 
+            // console.log(diffTime);
+
+            if (diffTime <= 0) {
+                timeBox.innerHTML = '活动已经结束';
+                clearInterval(timer);
+                return;
+            };
+
+
+            let day = Math.floor(diffTime / 60 / 60 / 24);
+            diffTime %= 86400; 
+            // console.log(diffTime);
+            /*
+                65
+                65/60 1
+                diff = 65 % 60 = 5 
+
+                1分05
+                86401
+
+                var i= 1
+                i+=2  =3
+
+                var a = 10
+                a%=2  =0
+                a%=4  =2
+
+            */
+            let hours = Math.floor(diffTime / 60 / 60);
+            diffTime %= 60 * 60;
+            let minutes = Math.floor(diffTime / 60);
+            let seconds = Math.floor(diffTime %= 60);
+
+            day < 10 ? day = '0' + day : null;
+            hours < 10 ? hours = '0' + hours : null;
+            minutes < 0 ? minutes = '0' + minutes : null;
+            seconds < 10 ? seconds = '0' + seconds : null;
+
+            timeBox.innerHTML = day + '天' + hours + ':' + minutes + ':' + seconds;
+        };
+        fn();
+        var timer = setInterval(fn, 1000);
+    </script>
+</body>
+
+</html>

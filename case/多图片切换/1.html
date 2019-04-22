@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function banner(after, before, imgs, p, span, a, b) {
+            let index = 0; //当前图片的序号 当点击左侧按钮时，让序号-1；当点击右侧按钮时候，让序号+1  (为什么index=0可以，index=1不可以？)
+            after.onclick = function () {
+                imgs[index].style.display = 'none';
+                index++;
+                index == a ? index = 0 : null;
+                p.innerHTML = `这是第${index + 1}张图片`; // 为什么index+1 可以 index++ index不可以？
+                span.innerHTML = `${(index + 1)}/${a}`; // 模板字符串与传参？？
+                imgs[index].style.display = 'block';
+            };
+            before.onclick = function () {
+                imgs[index].style.display = 'none';
+                index--;
+                index == -1 ? index = b : null;
+                p.innerHTML = `这是第${index + 1}张图片`;
+                span.innerHTML = `${(index + 1)}/${a}`;
+                imgs[index].style.display = 'block';
+            };
+        };
+        banner(after1, before1, imgs, p1, span1, 4, 3);
+        banner(after2, before2, imgs2, p2, span2, 3, 2);
+
+    </script>
+</body>
+
+</html>

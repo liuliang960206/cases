@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        span {
+            background: yellow;
+        }
+    </style>
+</head>
+
+<body>
+    <input type="text" id="txt" />
+    <button id="btn">查找</button>
+    <br />
+    <input type="text" id="txt1" />
+    <input type="text" id="txt2" />
+    <button id="btn2">替换</button>
+    <p id="news">海外网4月18日消息，18日下午，台湾花莲县海域发生6.7级地震。截至目前，花莲太鲁阁园区有两名游客遭落石击伤，另外各地灾情陆续传出，新北市有三名民众受伤。
+        据台湾“中时电子报”报道，下午1时许，台湾太鲁阁公园园区的合流绿水步道上有一男一女两名游客遭落石击伤，医务人员已赶往救护现场。台警方证实，落石地点在绿水步道山区起点1公里处，一男一女两名伤者都是马来西亚籍游客。其中女游客头部被砸伤，男性游客下半身遭落石压住。
+    </p>
+    <script>
+        const txt = document.getElementById('txt');
+        const btn = document.getElementById('btn');
+        const news = document.getElementById('news');
+        // console.log(typeof news)
+        // 当点击查找时，所有和输入的txt.value一样的字符 加上span标签
+        let newsTxt = news.innerHTML; //把p标签中的文字（object类型转换为字符串（string类型），存储在一个变量里面
+        // console.log(typeof newsTxt)
+        btn.onclick = function () {
+            if (newsTxt.indexOf(txt.value) === -1) {
+                alert('很抱歉，没有找到您所查找的关键字');
+                return;
+            }
+            // let str = '新北市有三名民众受伤'
+            // '两名' <span>游客</span> '遭落石击伤'
+
+            /* 
+                let str = '新北市有三名民众受伤'
+                let ary = str.split('民众')  //=> ["新北市有三名", "受伤"]
+                ary.join('<span>民众</span>') //=>"新北市有三名<span>民众</span>受伤"
+            */
+
+            let container = newsTxt.split(txt.value).join('<span>' + txt.value + '</span>');
+            news.innerHTML = container;
+        }
+
+        /* 
+            思路：
+            1.判断两边的input中都得有值
+            2.判断第一个input的值有没有在box中，有就替换
+            3.替换：拿第一个input的内容切，拼成第二个input中的值
+        */
+        // console.log(typeof txt1.value)
+        btn2.onclick = function () {
+            let val1 = txt1.value;
+            let val2 = txt2.value;
+            if (val1 && val2) {
+                if (newsTxt.includes(val1)) {
+                    news.innerHTML = newsTxt.split(val1).join('<span>' + val2 + '</span>');
+                    newsTxt = news.innerHTML;
+                } else {
+                    alert('很抱歉，没有找到您所查找的关键字')
+                }
+            } else {
+                alert('请输入内容！')
+            };
+        };
+
+
+        // 如果输入的文字页面中有 但不是连续关键字，如何能让找到的文字一定被找到？
+
+    </script>
+</body>
+
+</html>

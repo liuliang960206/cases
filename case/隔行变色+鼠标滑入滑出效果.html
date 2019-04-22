@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .box {
+            width: 350px;
+            margin: 20px auto;
+            /* border: 1px solid #333; */
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .box ul li {
+            padding: 0 10px;
+            height: 40px;
+            line-height: 40px;
+            border-bottom: 1px solid #333;
+            cursor: pointer;
+        }
+
+        .box ul li:nth-of-type(1) {
+            border-top: 1px solid #333;
+        }
+
+        .bg0 {
+            background-color: rgb(255, 218, 243);
+        }
+
+        .bg1 {
+            background-color: rgb(241, 241, 241);
+        }
+
+        .bg2 {
+            background-color: rgb(249, 255, 227);
+        }
+
+        .hover {
+            background-color: lightsalmon;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box" id="box">
+        <ul>
+            <li>"提前退休"来了!公务员迎大变革</li>
+            <li>埃航遇难者葬礼:家属用焦土代替遗体2</li>
+            <li>江苏盐城化工厂爆炸致44人死亡</li>
+            <li>埃航遇难者葬礼:家属用焦土代替遗体4</li>
+            <li>埃航遇难者葬礼:家属用焦土代替遗体5</li>
+            <li>埃航遇难者葬礼:家属用焦土代替遗体6</li>
+            <li>埃航遇难者葬礼:家属用焦土代替遗体7</li>
+        </ul>
+    </div>
+    <script>
+        var list = document.querySelectorAll('#box>ul>li');
+        for (var i = 0; i < list.length; i++) {
+            var item = list[i];
+            // item.className = 'bg' + (i % 2);
+            item.className = `bg${i % 3}`;
+            list[i].onmouseover = function () {
+                this.className += ' hover';
+            }
+            list[i].onmouseout = function () {
+                this.className = this.className.replace(' hover', '');
+            }
+        }
+
+        // var list = document.querySelectorAll('#box>ul>li');
+        // for (var i = 0; i < list.length; i++) {
+        //     // var item = list[i];
+        //     var cur = 'bg' + (i % 2);
+        //     list[i].className = cur;
+        //     list[i].bg = cur; // 将类名备份
+        //     list[i].onmouseover = function(){
+        //         this.className = 'hover';
+        //     };
+        //     list[i].onmouseout =function(){
+        //         this.className = this.bg;
+        //     }
+        // }
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #ul>li {
+            list-style: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        已选中 :<input type="radio" name="r" id="radio1">
+        未选中 :<input type="radio" name="r" id="radio2">
+    </div>
+    <ul id="ul">
+        <!-- <li><input type="checkbox" /></li>
+        <li><input type="checkbox" /></li>
+        <li><input type="checkbox" checked/></li> -->
+    </ul>
+    <button id="go">筛选</button>
+    <script>
+        /*
+            checkbox的勾选通过checked这个属性去修改
+            需求:
+                1.把下面的数组生成li input checkbox,并且通过
+                布尔值来操作是否选中
+                2.当点击筛选的时候，过滤出已选中的数据，或者未选中的数据
+        */
+
+        const ul = document.getElementById('ul');
+        const radio = document.getElementById('radio');
+        const radio1 = document.getElementById('radio1');
+        const radio2 = document.getElementById('radio2');
+
+
+        let arr = [true, true, false, false, true, false, true];
+        function fn(arr) {
+            let html = '';
+            arr.forEach(function (item, i) {
+                html += `<li><input type="checkbox" ${item?'checked':''}/></li>`
+            });
+            ul.innerHTML = html;
+        };
+        fn(arr);
+
+
+
+        go.onclick = function () {
+            let arr2 = arr.filter(function (item, i) {
+                return item === true
+            });
+            if (radio1.checked) {
+                fn(arr2);
+            };
+
+            let arr3 = arr.filter(function (item, i) {
+                return item === false
+            });
+            if (radio2.checked) {
+                fn(arr3);
+            };
+        };
+
+
+    </script>
+</body>
+
+</html>

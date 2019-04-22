@@ -1,0 +1,108 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title></title>
+    <style>
+        body {
+            background: #f1f1f1;
+            font-family: "微软雅黑";
+        }
+
+        ul {
+            margin: 5px 0 0 0;
+            padding: 0;
+            list-style: none;
+            width: 150px;
+            background: #f1f1f1;
+        }
+
+        li {
+            border-left: 1px solid #fff;
+            border-bottom: 1px solid #999;
+            border-top: 1px solid #fff;
+            border-right: 1px solid #ccc;
+            line-height: 28px;
+            text-indent: 20px;
+            font-family: arial;
+            cursor: pointer;
+            border-radius: 4px;
+            margin-bottom: 3px;
+            color: #6f6f7a;
+            transition: 0.3s;
+        }
+
+        li:hover {
+            border-right: 1px solid #fff;
+            border-top: 1px solid #999;
+            border-bottom: 1px solid #fff;
+            border-left: 1px solid #999;
+            background: #6e697a;
+            color: #fff;
+        }
+
+        img {
+            width: 400px;
+            position: absolute;
+            top: 33px;
+            left: 200px;
+            display: none;
+            border-radius: 8px;
+        }
+
+        .show {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <input id="btn1" type="button" value="添加" />
+    <input id="btn2" type="button" value="减少" />
+    不需要使用DOM创建、删除方法，不需要使用索引值，完成练习。
+    <ul id="ul">
+
+    </ul>
+    <!-- <img id="img1" src="img/1.jpg" /> -->
+
+    <script type="text/javascript">
+        let arr = ['img/1.jpg', 'img/2.jpg', 'img/3.jpg', 'img/4.jpg', 'img/5.jpg', 'img/6.jpg'];
+
+
+        const add = document.getElementById('btn1');
+        const subtract = document.getElementById('btn2');
+        const ul = document.getElementById('ul');
+        const lis = ul.getElementsByTagName('li');
+        
+        let num = 1;
+        // let ary = [];
+
+        add.onclick = function () {
+            const imgs = document.getElementsByTagName('img');
+            ul.innerHTML += `<li>第${num++}张图片</li>`;
+           
+            // let count = 0;
+            // for (let i = 0; i < lis.length; i++) {
+            //     conut += ary.push(ul.innerHTML);
+            //     console.log(count);
+            // };
+            // console.log(ul);
+            console.log(lis);
+
+            for (let i = 0; i < lis.length; i++) {
+                lis[i].onclick = function () {
+                    imgs[i].style.display = 'block';
+                    document.innerHTML = `<img id="img1" src="arr[i]" />`;
+                };
+            };
+        };
+
+
+
+
+    </script>
+
+</body>
+
+</html>

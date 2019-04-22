@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <p>一个提案指的是被 996.ICU 项目接受的建议文档。 通常一个提案应该给出一个能促进项目或社区本身发展的建议或解决方案。 请阅读提案模板来了解更多细节。
+        关于提案部分，你可以尝试以下事情来助力996.ICU项目的发展：
+        阅读996ICU项目已接受的提案并且尝试提出改进建议。
+        根据提案建议做出自己力所能及的行动。
+        对项目或社区的发展提出自己的想法，并通过PR的形式提交到项目组。
+    </p>
+    <a href="javascript:;">收缩</a>
+    <script>
+        const p = document.querySelector('p');
+        const a = document.querySelector('a');
+        let str = p.innerText;
+        console.log(typeof str);
+        let onOff = true;
+        a.onclick = function () {
+            if (onOff) {
+                a.innerText = '展开';
+                p.innerText = str.substring(0, 21);
+            }else{
+                a.innerText = '收缩';
+                p.innerText = str;
+            }
+            onOff = !onOff;
+        };
+    </script>
+</body>
+
+</html>
