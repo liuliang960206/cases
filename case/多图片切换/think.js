@@ -1,3 +1,5 @@
+// 112233哈哈哈
+
 const before1 = document.getElementById('before1');
 const before2 = document.getElementById('before2');
 const after1 = document.getElementById('after1');
@@ -70,7 +72,7 @@ next.onclick = function () {
     imgs2[index2].style.display = 'block';
 };
 
-//上一组下一组封装？？？
+// // 上一组下一组封装？？？
 // function fn(imgs, index, a, p, span, b) {
 //     imgs[index].style.display = 'none';
 //     index--;
