@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /*
+        [^36543]  排除 36543
+        */
+        // let str = 'a1ca2ca3ca6c';
+        // console.log(str.match(/[^26]/g));
+        let str = `
+            <div id="job-container" class="tempWrap">
+                <div class="tempWrap" style="overflow:hidden; position:relative; height:700px">
+                    <ul class="grid infoList" id="infoList" style="height: 2800px; position: relative; padding: 0px; margin: 0px; top: -650px;">
+                        <li class="clone" style="height: 50px;">
+                        <span>高*</span>           
+                        <span>河南农业大学</span>           
+                        <span>生物工程</span>           
+                        <span>阿里巴巴</span>
+                        <span class="money"><i>18000/月</i></span>
+                        <span>杭州</span>
+                        </li>
+                        <li style="height: 50px;">
+                        <span>刘*</span>           
+                        <span>宝鸡文理学院</span>           
+                        <span>电子信息</span>           
+                        <span></span>
+                        <span class="money"><i>30000/月</i></span>
+                        <span>北京</span>
+                        </li>
+                        <li class="clone" style="height: 50px;">
+                        <span>袁**</span>           
+                        <span>江西理工</span>           
+                        <span>软件工程</span>           
+                        <span>去哪儿</span>
+                        <span class="money"><i>19000/月</i></span>
+                        <span>北京</span>
+                        </li>
+                    </ul>
+                </div>  
+            </div>`
+        let reg = /<[^>]+>/g; //全局匹配 一个开始标签+1个或多个非结束标签+结束标签 
+        console.log(str.match(reg));
+        str = str.replace(reg, ''); //把所有符合正则的字符串替换成空
+        let ary = [];
+        str.replace(/(\d+)/g, ($0, $1) => {
+            ary.push($1 * 1);
+        });
+        let num = 0;
+        for(let item of ary){
+            num += item
+        }
+        let a = Math.round(num/ary.length); //平均薪资
+        let b = Math.max(...ary); //最高薪资
+        console.log(a)
+        console.log(b)
+
+    </script>
+</body>
+
+</html>

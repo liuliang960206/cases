@@ -64,35 +64,28 @@
     <ul id="ul">
 
     </ul>
-    <!-- <img id="img1" src="img/1.jpg" /> -->
+    <img id="img1" src="img/1.jpg" />
 
     <script type="text/javascript">
         let arr = ['img/1.jpg', 'img/2.jpg', 'img/3.jpg', 'img/4.jpg', 'img/5.jpg', 'img/6.jpg'];
 
-
-        const add = document.getElementById('btn1');
+        const btn1 = document.getElementById('btn1');
         const subtract = document.getElementById('btn2');
         const ul = document.getElementById('ul');
         const lis = ul.getElementsByTagName('li');
-        
+
         let num = 1;
         // let ary = [];
 
-        add.onclick = function () {
-            const imgs = document.getElementsByTagName('img');
-            ul.innerHTML += `<li>第${num++}张图片</li>`;
-           
-            // let count = 0;
-            // for (let i = 0; i < lis.length; i++) {
-            //     conut += ary.push(ul.innerHTML);
-            //     console.log(count);
-            // };
-            // console.log(ul);
+        btn1.onclick = function () {
+            if (num < arr.length)
+                ul.innerHTML += `<li>第${num++}张图片</li>`;
+
             console.log(lis);
 
             for (let i = 0; i < lis.length; i++) {
                 lis[i].onclick = function () {
-                    imgs[i].style.display = 'block';
+                    imgs1.style.display = 'block';
                     document.innerHTML = `<img id="img1" src="arr[i]" />`;
                 };
             };

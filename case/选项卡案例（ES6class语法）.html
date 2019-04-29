@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #box {
+            width: 200px;
+            height: 50px;
+            border: 1px solid #000;
+        }
+
+        #box div {
+            display: none;
+        }
+
+        #box div.show {
+            display: block;
+        }
+
+        .active {
+            background: yellow;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="wrap">
+        <button class="active">按钮1</button>
+        <button>按钮2</button>
+        <button>按钮3</button>
+
+        <section id="box">
+            <div class="show">头条</div>
+            <div>体育</div>
+            <div>新闻</div>
+        </section>
+    </div>
+
+    <div id="wrap1">
+        <button class="active">按钮1</button>
+        <button>按钮2</button>
+        <button>按钮3</button>
+
+        <section id="box">
+            <div class="show">头条</div>
+            <div>体育</div>
+            <div>新闻</div>
+        </section>
+    </div>
+    
+
+    <div id="wrap2">
+        <button class="active">按钮1</button>
+        <button>按钮2</button>
+        <button>按钮3</button>
+
+        <section id="box">
+            <div class="show">头条</div>
+            <div>体育</div>
+            <div>新闻</div>
+        </section>
+    </div>
+    <button id="btn1">点击停止</button>
+
+    <div id="wrap3">
+        <button class="active">按钮1</button>
+        <button>按钮2</button>
+        <button>按钮3</button>
+
+        <section id="box">
+            <div class="show">头条</div>
+            <div>体育</div>
+            <div>新闻</div>
+        </section>
+    </div>
+    <button id="btn2">点击倒序播放</button>
+
+    <div id="wrap4">
+        <button class="active">按钮1</button>
+        <button>按钮2</button>
+        <button>按钮3</button>
+
+        <section id="box">
+            <div class="show">头条</div>
+            <div>体育</div>
+            <div>新闻</div>
+        </section>
+    </div>
+    <button id="btn3">点击停止再点击播放</button>
+
+    <script>
+        class Tab {
+            constructor(id) {
+                this.wrap = document.getElementById(id);
+                this.btns = this.wrap.querySelectorAll('button');
+                this.divs = this.wrap.querySelectorAll('div');
+                this.num = 0;
+                this.timer = null;
+            }
+            events() {
+                let that = this;
+                for (let i = 0; i < this.btns.length; i++) {
+                    this.btns[i].onclick = function () {
+                        that.change(i);
+                    };
+                };
+            };
+            change(index) {
+                for (let i = 0; i < this.btns.length; i++) {
+                    this.btns[i].className = '';
+                    this.divs[i].className = '';
+                };
+                this.btns[index].className = 'active';
+                this.divs[index].className = 'show';
+            };
+            play() {
+                this.timer = setInterval(() => {
+                    this.num++;
+                    this.num > this.btns.length - 1 ? this.num = 0 : null;
+                    this.change(this.num);
+                }, 1000);
+            };
+            stop() {
+                clearInterval(this.timer);
+                this.timer = null;
+            };
+            reversePlay(){
+                this.timer = setInterval(() => {
+                this.num--;
+                this.num < 0 ? this.num = this.btns.length - 1 : null;
+                this.change(this.num);
+            }, 1000);
+            };
+            isAutoPlay(){
+                return this.timer;
+            }
+        };
+        let t1 = new Tab('wrap');
+        let t2 = new Tab('wrap1');
+        let t3 = new Tab('wrap2');
+        let t4 = new Tab('wrap3');
+        let t5 = new Tab('wrap4');
+        t1.events();
+        t2.events();
+        t3.play();
+        t4.play();
+        t5.play();
+        btn1.onclick = function () {
+            t3.stop();
+        };
+
+        btn2.onclick = function () {
+            t4.stop();// 如果不停止 就与前面的顺序播放冲突
+            t4.reversePlay();
+        };
+        
+        btn3.onclick = function(){
+            //isAutoPlay方法 会返回一个数字。
+            //当前t5状态为播放，点击一下，返回数字=>true，执行停止方法，返回timer=0 =>false,执行播放方法
+            if(t5.isAutoPlay()){
+                t5.stop();
+            }else{
+                t5.play();
+            };
+        };
+        
+    </script>
+</body>
+
+</html>

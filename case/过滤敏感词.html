@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>
+        <h1>运营</h1>
+        <input type="text" id="input1"/>
+        <button id="btn">添加</button>
+        <ul id="ul1">
+            <li>卧槽</li>
+        </ul>
+    </div>
+    <div>
+        <h1>自己</h1>
+        <input type="text" id="input2" />
+        <button id="btn2">发送</button>
+        <p id="p1"></p>
+    </div>
+
+    <script>
+        let sql = ['艹', '尼玛', '卧槽', '垃圾', '菜鸡', '傻X']
+        btn.onclick = function () {
+            let v1 = input1.value
+            if (v1) {
+                //如果原数组没有要添加的词
+                if (!sql.some(item => item === v1)) {
+                    sql.push(v1);
+                    render(sql);
+                }else{
+                    alert('该敏感词已存在');
+                }
+            }
+            input1.value = ''
+        }
+        render(sql);
+        function render(arr) {
+            let html = '';
+            arr.forEach(item => html += '<li>' + item + '</li>')
+            ul1.innerHTML = html;
+        }
+
+        // // console.log(sql.join('|')); // 艹|尼玛|卧槽|垃圾|菜鸡|傻X
+        // // new RegExp('')
+        // btn2.onclick = function(){
+        //     let v2 = input2.value;
+        //     let reg = new RegExp(sql.join('|'),'g');
+        //     // console.log(sql.join('|'),"g");
+        //     let char = '!@#$%^&*';
+        //     let s = v2.replace(reg,function($0){
+        //         let temp = '';
+        //         for(let i =0;i<$0.length;i++){
+        //             temp += char[Math.floor(Math.random()*char.length)];
+        //         };
+        //         return temp;
+        //     });
+        //     p1.innerHTML = s;
+        // }
+
+
+
+        
+    </script>
+</body>
+
+</html>
