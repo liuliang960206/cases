@@ -45,14 +45,14 @@
         let timer = setInterval(() => {
 
             let nowTime = new Date;
-            let tarTime = new Date('2019/04/19 20:00:00')
+            let tarTime = new Date('2019/05/02 20:00:00')
             let diffTime = (tarTime - nowTime) / 1000;
             if (diffTime <= 0) {
                 clearInterval(timer);
                 return;
             };
             let hours = Math.floor(diffTime / 60 / 60);
-            diffTime % (60 * 60);
+            diffTime %= (60 * 60);
             let mintus = Math.floor(diffTime / 60);
             let seconds = Math.floor(diffTime % 60);
 
@@ -60,7 +60,7 @@
             mintus < 10 ? mintus = '0' + mintus : null;
             seconds < 10 ? seconds = '0' + seconds : null;
             let time = hours + ":" + mintus + ":" + seconds;
-            // console.log(time)
+            console.log(time)
             for (let i = 0; i < time.length; i++) {
                 if (i !== 2 && i !== 5) {
                     //如果time字符串的索引不是':' 就把其他各项换成图片 imgs[i].src = 'img/0.png' 

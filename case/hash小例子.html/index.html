@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <button id="left">上一张</button>
+    <button id="right">上一张</button>
+    <img src="img/1.jpg" id="img"/>
+    <script>
+        let ary = ['img/1.jpg', 'img/2.jpg', 'img/3.jpg', 'img/4.jpg'];
+        let num = null;
+        let hash = window.location.hash;
+        if (hash) {
+            num = hash.split('=')[1] * 1;
+        } else {
+            hash = 'page=0';
+        };
+        img.src = ary[num];
+    </script>
+</body>
+
+</html>
