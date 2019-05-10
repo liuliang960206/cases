@@ -37,7 +37,7 @@ let data = [
         price: '5000'
     },
 ];
-class shop {
+class Shop {
     constructor(data) {
         this.render(data);
         this.data = data;
@@ -209,7 +209,7 @@ class shop {
         this.li2.innerHTML = '价钱（总价：' + total + '）';
     }
 }
-let s = new shop(data);
+let s = new Shop(data);
 fn(0)
 fn(1)
 
