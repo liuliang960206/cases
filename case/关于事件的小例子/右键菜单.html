@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            font-size: 12px;
+        }
+
+        ul {
+            width: 80px;
+            border: 1px dotted darkorange;
+            border-bottom: none;
+            position: absolute;
+            left: 0;
+            top: 0;
+            display: none;
+        }
+
+        ul li {
+            width: 80px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            border-bottom: 1px dotted darkorange;
+            cursor: pointer;
+        }
+
+        ul li:hover {
+            background: chartreuse;
+            color: crimson;
+        }
+    </style>
+</head>
+
+<body>
+    <ul id="ul">
+        <li>进入游戏</li>
+        <li>进入下一关</li>
+        <li>帮助</li>
+        <li>充值</li>
+        <li>重载游戏</li>
+        <li>退出游戏</li>
+    </ul>
+    <script>
+        document.addEventListener('contextmenu',function(ev){
+            // 单击右键,显示自己的菜单，并且让菜单跟随在鼠标的位置，同时组织默认菜单显示
+            ev.preventDefault();
+            ul.style.display = 'block';
+            ul.style.left = ev.clientX + 'px';
+            ul.style.top = ev.clientY + 'px';
+        })
+        document.addEventListener('click',function(){
+            //鼠标单击空白处，自定义菜单隐藏
+            ul.style.display = 'none';
+        })
+        //基于冒泡机制 单击菜单列表项也会向上触发点击document的事件，所以单击菜单列表项也会隐藏菜单，需要阻止冒泡
+        ul.addEventListener('click',function(ev){
+            ev.cancelBubble = true;
+        })
+    </script>
+</body>
+
+</html>

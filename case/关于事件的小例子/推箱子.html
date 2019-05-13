@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #box {
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box"></div>
+    <script>
+        // num1 = 0;
+        // num2 = 0
+        // let timer = null;
+        // document.addEventListener('keydown', function move(ev) {
+        //     clearInterval(timer);
+        //     timer = setInterval(() => {
+        //         switch (ev.keyCode) {
+        //             case 39:
+        //                 num1 += 10;
+        //                 // box.style.left = num1 + 'px';
+        //                 break;
+        //             case 40:
+        //                 num2 += 10;
+        //                 // box.style.top = num2 + 'px';
+        //                 break;
+        //             case 37:
+        //                 num1 -= 10;
+        //                 // box.style.left = num1 + 'px';
+        //                 break;
+        //             case 38:
+        //                 num2 -= 10;
+        //                 // box.style.top = num2 + 'px';
+        //                 break;
+        //         }
+        //         num1 < 0 ? num1 = 0 : null;
+        //         box.style.left = num1 + 'px';
+        //         num2 < 0 ? num2 = 0 : null;
+        //         box.style.top = num2 + 'px';
+        //     }, 22)
+        // });
+        // document.addEventListener('keyup',function(){
+        //     clearInterval(timer)
+        // })
+
+            /* 
+                按下的时候只是为了改变方向，定时器开始是开着的，全程只有一个定时器开着
+                创建一个对象：
+                {
+                    37:true
+                    38:true
+                    39:false
+                    40:false
+                }
+                Object.keys：放对象，拿到对象中的key值，返回一个数组
+                Object.values：放对象，拿到对象中的value值，返回一个数组
+            */
+
+            let timer = null;
+            let onoff = false; //假设定时器开启
+            let obj = {
+                37:false,
+                38:false,
+                39:false,
+                40:false
+            };
+
+            // console.log(Object.keys(obj)); //["37", "38", "39", "40"]
+            // console.log(Object.values(obj)); // [false, false, false, false]
+
+            Object.values(obj)
+
+            document.addEventListener('keydown',function(ev){
+                obj[ev.keyCode] = true;
+                console.log(obj)
+            })
+
+            timer = setInterval(()=>{
+                if(obj[37]){
+                    box.style.left = box.offsetLeft - 10 +'px';
+                }
+                if(obj[38]){
+                    box.style.top = box.offsetTop - 10 +'px';
+                }
+                if(obj[39]){
+                    box.style.left = box.offsetLeft + 10 +'px';
+                }
+                if(obj[40]){
+                    box.style.top = box.offsetTop + 10 +'px';
+                }
+            },16.7)
+            
+            let num = 0;
+            document.addEventListener('keyup',function(ev){
+                obj[ev.keyCode] = false;
+                Object.values(obj).every(item=>!item)
+                // for(attr in obj){
+                //     if(!obj[attr]){
+                //         num++;
+                //         if(num === 4){
+                //             clearInterval(timer);
+                //         }
+                //     }
+                // }
+            })
+    </script>
+</body>
+
+</html>
