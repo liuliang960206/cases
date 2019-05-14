@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #box {
+            width: 80px;
+            height: 80px;
+            background: darkgoldenrod;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        .active {
+            width: 80px;
+            height: 80px;
+            background: darkgoldenrod;
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: .5;
+        }
+    </style>
+</head>
+
+<body id="body">
+    <div id="box"></div>
+    <script>
+        box.onmousedown = function (ev) {
+            let disX = ev.pageX - box.offsetLeft;
+            let disY = ev.pageY - box.offsetTop;
+            // 复制box元素（包括复制class类名）
+            let createBox = document.createElement('div');
+            createBox.className = 'active';
+
+            // createBox.style.left = box.offsetLeft + 'px';
+            // createBox.style.top = box.offsetTop + 'px';
+            body.appendChild(createBox);
+            document.onmousemove = function(ev){
+    
+                let left = ev.pageX - disX;
+                let top = ev.pageY - disY;
+                createBox.style.left = left + 'px';
+                createBox.style.top = top + 'px';
+            }
+            document.onmouseup = function(){
+                //鼠标抬起时，把复制元素的位置给起始元素，并删掉复制元素
+                box.style.left = createBox.style.left;
+                box.style.top = createBox.style.top;
+                console.log(box.style.left);
+                createBox.remove();
+                document.onmousemove = null;
+                document.onmouseup = null;
+            }
+           return false; //阻止默认行为
+        }
+    </script>
+</body>
+
+</html>

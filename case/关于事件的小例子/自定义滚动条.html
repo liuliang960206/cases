@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #box1 {
+            width: 30px;
+            height: 300px;
+            background: #000;
+            position: relative;
+            float: left;
+        }
+
+        #box2 {
+            width: 30px;
+            height: 30px;
+            background: red;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        #box3 {
+            width: 300px;
+            height: 300px;
+            border: 1px solid #000;
+            position: relative;
+            float: left;
+            left: 5px;
+            /* overflow: hidden; */
+        }
+
+        #box4 {
+            position: absolute;
+            top: 0;
+            left: 0;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box1">
+        <div id="box2"></div>
+    </div>
+    <div id="box3">
+        <div id="box4">
+            二十世纪，全世界经历了两次世界大战。一战的影响，将全世界拉入大恐慌，二战出现，实际上是一战未了的许多问题，留到二战寻求解决。这两次战争中，美国都是先以局外人的身分，旁观一个时期，然后在关键性的时刻，投身参战。两次战争，对美国的经济，尤其工业的发展，有极大的正面影响。一战的正面影响，被大恐慌冲消了。二战的影响，却是引导了美国开展另一轮的产业，那一强大的动力，只今延续未歇。
+            二十世纪，全世界经历了两次世界大战。一战的影响，将全世界拉入大恐慌，二战出现，实际上是一战未了的许多问题，留到二战寻求解决。这两次战争中，美国都是先以局外人的身分，旁观一个时期，然后在关键性的时刻，投身参战。两次战争，对美国的经济，尤其工业的发展，有极大的正面影响。一战的正面影响，被大恐慌冲消了。二战的影响，却是引导了美国开展另一轮的产业，那一强大的动力，只今延续未歇。
+        </div>
+    </div>
+    <script>
+        box2.addEventListener('mousedown',function(ev){
+            let disY = ev.pageY - box2.offsetTop;
+            let move  = function(ev){
+                let t = ev.pageY - disY;
+                if (t < 0) {
+                    t = 0;
+                } else if (t > box1.clientHeight - box2.clientHeight) {
+                    t = box1.clientHeight - box2.clientHeight
+                }
+                let scale = t / (box1.clientHeight - box2.clientHeight)
+                box4.style.top = scale * - (box4.scrollHeight - box3.clientHeight) + 'px'
+                box2.style.top = t + 'px';
+            }
+            document.addEventListener('mousemove',move);
+            document.addEventListener('mouseup',function(){
+                document.removeEventListener('mousemove',move);
+                document.removeEventListener('mouseup',up);
+            })
+        })
+    </script>
+</body>
+
+</html>

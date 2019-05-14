@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #box {
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: red;
+        }
+        body{
+            height: 3000px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box"></div>
+    <script>
+        document.onmousemove = function (ev) {
+            // console.log(ev.clientX);
+            // console.log(ev.clientY);
+            // 实现鼠标在盒子中间：ev.pageX: 鼠标离窗口左边的距离 - 盒子宽度的一半 此时left：盒子左边到浏览器左边的距离
+            let left = ev.pageX - box.clientWidth / 2;
+            let top = ev.pageY - box.clientHeight / 2;
+ 
+            if (left < 0) {
+                left = 0;
+            } 
+            if (left > document.documentElement.clientWidth - box.clientWidth) {
+                // document.documentElement.clientWidth - box.clientWidth 即盒子距离窗口左边的最大距离（超过此最大距离，盒子就会溢出窗口）
+                // 盒子到浏览器左边的距离 > 最大距离，就让盒子到浏览器左边的距离 = 最大距离
+                left = document.documentElement.clientWidth - box.clientWidth;
+            }
+
+            if (top < 0) { 
+                top = 0;
+            } else if (top > document.documentElement.clientHeight - box.clientHeight) {
+                top = document.documentElement.clientHeight - box.clientHeight;
+            }
+            //让盒子距窗口左边/顶部的距离 = 鼠标离窗口左边/顶部的距离
+            box.style.left = left + 'px';
+            box.style.top = top + 'px';
+        }
+    </script>
+</body>
+
+</html>

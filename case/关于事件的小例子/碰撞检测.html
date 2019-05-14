@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #box1 {
+            width: 100px;
+            height: 100px;
+            background: red;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        #box2 {
+            width: 100px;
+            height: 100px;
+            background: pink;
+            position: absolute;
+            top: 200px;
+            left: 300px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box1"></div>
+    <div id="box2"></div>
+    <script>
+        /* 
+            需求：拖拽Box1,如果box1碰到box2，则box2变色
+        */
+        class Collision {
+            constructor(id) {
+                this.box1 = document.getElementById(id);
+                this.box2 = document.getElementById('box2')
+                this.disX = 0; // 初始值：box1中，鼠标到box1左边框的距离
+                this.disY = 0; // 初始值：box1中，鼠标到box1上边框的距离
+                this.drag();
+            };
+            drag() {
+                // 拖拽
+                // console.log(this)
+                let that = this;
+                this.box1.addEventListener('mousedown', function (ev) {
+                    /* 
+                        鼠标到box1左边框的距离 = 鼠标到页面左边的距离 - box1左边框到父级左侧的距离
+                    */
+                    that.disX = ev.pageX - this.offsetLeft;
+                    that.disY = ev.pageY - this.offsetTop;
+                    that.moveFn = that.move.bind(that); // 改变that.move的this指向
+                    that.upFn = that.up.bind(that);
+                    document.addEventListener('mousemove', that.moveFn); // 此处不可写this.move 此处的this是document 所以在上面先用bind改变此事件函数的this指向，并储存返回的新函数 that.moveFn
+                    document.addEventListener('mouseup', that.upFn);
+                })
+            };
+            move(ev) {
+                if(duang(this.box1,this.box2)){
+                    this.box2.style.background = 'yellow';
+                }else{
+                    this.box2.style.background = 'pink';
+                }
+                // 移动的时候，盒子跟随鼠标移动
+                this.box1.style.left = ev.pageX - this.disX + 'px';
+                this.box1.style.top = ev.pageY - this.disY + 'px';
+            };
+            up() {
+                document.removeEventListener('mousemove', this.moveFn)
+                document.removeEventListener('mouseup', this.upFn)
+            };
+        };
+        let d = new Collision('box1');
+
+        // 封装
+        function duang(obj1, obj2) {
+            // 碰撞 储存box1和box2的四条边到页面顶部/左侧的距离
+            let l1 = obj1.offsetLeft;
+            let r1 = l1 + obj1.clientWidth;
+            let t1 = obj1.offsetTop;
+            let b1 = t1 + obj1.clientHeight;
+
+            let l2 = obj2.offsetLeft;
+            let r2 = l2 + obj2.clientWidth;
+            let t2 = obj2.offsetTop;
+            let b2 = t2 + obj2.clientHeight;
+
+            // 如果 没碰到就保持原来颜色，否则变色
+            if (r1 < l2 || l1 > r2 || b1 < t2 || t1 > b2) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #box {
+            width: 0;
+            height: 0;
+            background: rgba(189, 189, 189, 0.3);
+            border: 1px dashed blue;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        #box1{
+            width: 100px;
+            height: 100px;
+            background: red;
+            position: absolute;
+            top: 300px;
+            left:200px;
+        }
+    </style>
+</head>
+
+<body id="body">
+    <div id="box1"></div>
+    <!-- <div id="one">one</div> -->
+    <script>
+        let body = document.getElementById('body')
+        document.addEventListener('mousedown', function (ev) {
+            box1.style.background = 'red';
+            // let box = body.insertAdjacentHTML('afterbegin', '<div id="box"></div>')
+            let box = document.createElement('div');
+            box.id = 'box';
+            body.appendChild(box);
+            // 储存鼠标按下时，鼠标到页面顶部/左边的距离
+            let left = ev.pageX;
+            let top = ev.pageY;
+            box.style.cssText = `top:${top}px;
+            left:${left}px;`
+
+            let move = function (ev) {
+                /*
+                鼠标移动的时候计算:
+                1. box的width和height值
+                move的坐标 - 按下的坐标 = 移动的距离   
+                110 - 100 = 10px            
+                90 - 100 = -10px 元素最小值为0，没有负数
+                所以我们要取绝对值
+                
+                2. box的top和left值
+                当按下的值比移动的值要大的时候，
+                left和top要变化
+                left和top值跟鼠标的坐标走
+
+                如果按下的值比移动的值要小
+                left值和top值不变(left和top值就为按下的坐标)
+                按下的坐标
+                移动的坐标
+                left值 = 如果按下的坐标大于移动的坐标，移动的坐标
+                left值 = 如果按下的坐标小于移动的坐标，按下的坐标
+                按下的坐标：100√   移动的坐标：105
+                按下的坐标：100    移动的坐标：90√
+                按下的坐标和移动的坐标对比，哪个小,left就为哪个
+            */
+                box.style.width = Math.abs(ev.pageX - left )+ 'px';
+                box.style.height = Math.abs(ev.pageY - top) + 'px';
+                box.style.left = Math.min(left,ev.pageX) + 'px';
+                box.style.top = Math.min(top,ev.pageY) + 'px';
+
+                if(duang(box,box1)){
+                    box1.style.background = 'yellow';
+                }else{
+                    box1.style.background = 'red';
+                }
+            }
+            let up = function(){
+                box.remove();
+                document.removeEventListener('mousemove',move);
+                document.removeEventListener('mouseup',up);
+            }
+            document.addEventListener('mousemove', move);
+            document.addEventListener('mouseup',up);
+            ev.preventDefault(); // ???
+        })
+
+
+        // 封装
+        function duang(obj1, obj2) {
+            // 碰撞 储存box1和box2的四条边到页面顶部/左侧的距离
+            let l1 = obj1.offsetLeft;
+            let r1 = l1 + obj1.clientWidth;
+            let t1 = obj1.offsetTop;
+            let b1 = t1 + obj1.clientHeight;
+
+            let l2 = obj2.offsetLeft;
+            let r2 = l2 + obj2.clientWidth;
+            let t2 = obj2.offsetTop;
+            let b2 = t2 + obj2.clientHeight;
+
+            // 如果 没碰到就保持原来颜色，否则变色
+            if (r1 < l2 || l1 > r2 || b1 < t2 || t1 > b2) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+    </script>
+</body>
+
+</html>
