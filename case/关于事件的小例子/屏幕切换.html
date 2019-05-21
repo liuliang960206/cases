@@ -13,6 +13,7 @@
         }
 
         body {
+            height: 3000px;
             overflow-y: hidden;
         }
 
@@ -28,7 +29,41 @@
 <body>
     <div id="box"></div>
     <script>
-        let ary = ['pink','skyblue','khaki','tomato','lightblue'];
+        // let ary = ['pink', 'skyblue', 'khaki', 'tomato', 'lightblue'];
+        // // 存储一屏的宽高
+        // let width = document.documentElement.clientWidth;
+        // let height = document.documentElement.clientHeight;
+        // // 渲染页面
+        // let html = '';
+        // ary.forEach(item => {
+        //     html += `<div style="background:${item};width:${width}px;height:${height}px"></div>`;
+        // });
+        // box.innerHTML = html;
+
+        function addWheel(obj, fn) {
+            //let w = window.navigator.userAgent.toLowerCase();
+            // if(w.includes('chrome')){
+            if (obj.onmousewheel === null) {
+                // if('onmousewheel' in window){
+                obj.onmousewheel = whell;
+            } else {
+                obj.addEventListener('DOMMouseScroll', whell);
+            }
+
+            function whell(ev) {
+                let o = true;
+                // console.log(ev.wheelDelta);
+                if (ev.wheelDelta) { //是chrome
+                    o = ev.wheelDelta > 0 ? true : false;
+                } else {
+                    o = ev.detail < 0 ? true : false;
+                }
+
+                //回调函数
+                fn && fn(o);
+            }
+        }
+
     </script>
 </body>
 

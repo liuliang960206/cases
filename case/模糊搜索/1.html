@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        tr.highlight {
+            background: #08246B;
+            color: white;
+        }
+    </style>
+   
+
+<body>
+    <table border="1" width="70%" id="ice">
+          <tr onClick="selectTR();return false;">
+                <td>123</td>
+                <td>234</td>
+                <td>abc</td>
+                <td>def</td>
+              </tr>
+          <tr onClick="selectTR();">
+                <td>123</td>
+                <td>234</td>
+                <td>abc</td>
+                <td>def</td>
+              </tr>
+          <tr onClick="selectTR();">
+                <td>123</td>
+                <td>234</td>
+                <td>abc</td>
+                <td>def</td>
+              </tr>
+          <tr onClick="selectTR();">
+                <td>123</td>
+                <td>234</td>
+                <td>abc</td>
+                <td>def</td>
+              </tr>
+          <tr onClick="selectTR();">
+                <td>123</td>
+                <td>234</td>
+                <td>abc</td>
+                <td>def</td>
+              </tr>
+    </table>
+
+
+
+    <script>
+        var num = -1;
+        document.onkeydown = function (ev) {
+            switch (ev.keyCode) {
+                case 38:
+                    num--;
+                    changeItem();
+                    break;
+                case 40:
+                    num++;
+                    changeItem();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        // function selectTR() {
+        //     num = window.event.srcElement.parentElement.rowIndex;
+        //     //alert(num);
+        //     changeItem();
+        // }
+
+        //改变选择项目 
+        function changeItem() {
+            if (document)
+                var it = document.getElementById("ice").children[0];
+            else
+                var it = document.getElementById("ice");
+
+            for (i = 0; i < it.rows.length; i++) {
+                it.rows[i].className = "";
+            }
+            if (num < 0)
+                num = it.rows.length - 1;
+            if (num == it.rows.length)
+                num = 0;
+            it.rows[num].className = "highlight";
+        }
+    </script>
+</body>
+
+</html>

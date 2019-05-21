@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <button id="btn">新建文件夹</button>
+    <ul id="ul">
+        <!-- <li><input type="text" value="新建文件夹"/></li> -->
+    </ul>
+    <script>
+        let arr = [
+            {
+                title: '新建文件夹',
+                id: 0
+            },
+            {
+                title: '我的音乐(1)',
+                id: 1
+            },
+            {
+                title: '我的视频',
+                id: 2
+            }
+        ];
+
+        class NewFolder {
+            constructor(arr) {
+                this.arr = arr;
+                this.ul = document.getElementById('ul');
+                this.btn = document.getElementById('btn');
+                this.render();
+                this.clickEvent();
+            };
+            render() {
+                let html = '';
+                this.arr.forEach(item => {
+                    html += `<li><input type="text" value="${item.title}"/></li>`;
+                });
+                this.ul.innerHTML = html;
+            };
+            clickEvent() {
+                this.btn.onclick = function () {
+                    let li = document.createElement('li');
+                    let input = document.createElement('input');
+                    input.value = '新建文件夹';
+                    ul.append(li);
+                    li.append(input);
+                    input.select(); // 选中文本框中的内容
+                    
+                }
+            };
+        }
+        let n = new NewFolder(arr);
+    </script>
+</body>
+
+</html>
