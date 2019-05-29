@@ -47,7 +47,7 @@
 			border-radius: 10px;
 			border: 1px solid #30343f;
 			margin: auto;
-			background: url(img/logo.png) no-repeat 25px 25px #252934;
+			background: #252934;
 			box-sizing: border-box;
 			padding: 84px 25px 0px;
 			position: relative;
@@ -131,12 +131,23 @@
 <body>
 	<div id="content">
 		<div id="rightTop">
-			<a id="a" href="list.html" class="goback">&lt;&nbsp;返回招聘列表</a>
+			<a id="a" href="indexList.html" class="goback">&lt;&nbsp;返回招聘列表</a>
 			<a href="javascript:;">投个简历</a>
 		</div>
 		<div id="title">
-			<p>前端开发工程师</p>
-			<div class="simple">18k-25k<span>/</span>北京<span>/</span>经验3-5年<span>/</span>本科及以上<span>/</span>2名 <time>2014-04-10</time></div>
+			<!-- <p>前端开发工程师</p>
+			<div class="simple">
+				18k-25k
+				<span>/</span>
+				北京
+				<span>/</span>
+				经验3-5年
+				<span>/</span>
+				本科及以上
+				<span>/</span>
+				2名
+				<time>2014-04-10</time>
+			</div> -->
 		</div>
 		<div id="bottom">
 			<!-- <dl>
@@ -158,7 +169,72 @@
 		/*
 		通过search值去获取对应的数据
 		*/
-	
+		class Details {
+			constructor() {
+				this.id = 0;
+				this.hash = 'sh';
+				this.page = 0;
+				this.search = window.location.search;
+				this.title = document.getElementById('title')
+				this.d = data[this.hash].text[this.id];
+				this.a = document.getElementById('a')
+				this.render();
+				this.renderDetails()
+				this.returnButton()
+			}
+			render() {
+				let reg = /\?search=([a-z]{2})&id=(\d+)&page=(\d+)/;
+				this.search.replace(reg, ($0, $1, $2, $3) => {
+					this.hash = $1;
+					this.id = $2;
+					this.page = $3;
+					console.log($1, $2, $3);
+				})
+				if (this.d) {
+					title.innerHTML = `
+					<p>${this.d.zw}</p>
+					<div class="simple">
+					${this.d.dy}
+					<span>/</span>
+					${this.d.dd}
+					<span>/</span>
+					${this.d.jy}
+					<span>/</span>
+					${this.d.xl}
+					<span>/</span>
+					${this.d.rs}名
+					<time>${data.formateDate(this.d.sj)}</time></div>`;
+				}
+			}
+			renderDetails(index) {
+				// console.log(this.d.info[1].t)
+				let html = `<dl>
+				<dt>${this.d.info[0].t}</dt>
+				${
+					this.d.info[0].l.map(item => {
+						return (`<dd>${item}</dd>`)
+					}).join('')
+					}
+				</dl>`;
+
+				if (this.d.info[1]) {
+					html += `<dl>
+				<dt>${this.d.info[1].t}</dt>
+				${
+					this.d.info[1].l.map(item => {
+						return (`<dd>${item}</dd>`)
+					}).join('')
+				}
+				</dl>`
+				};
+				bottom.innerHTML = html;
+			};
+			returnButton(){
+				this.page = 1
+				a.href = 'list.html#hash='+this.hash+'&page='+this.page;
+			}
+		};
+		new Details();
 	</script>
 </body>
 

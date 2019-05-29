@@ -8,6 +8,7 @@ class Recruit {
         this.dataName = 'sh';
         this.page = 1;
         this.hash = window.location.hash;
+        this.hashEvent();
         this.render(this.data, this.dataName);
         this.eventSwitch();
         this.pageEvent();
@@ -31,7 +32,8 @@ class Recruit {
                 <span class="num">${data.add0(i + 1)}</span>
                 <div class="list">
                     <a href=""><span class="job">职位需求：${data[dataName].text[i].zw}</span><span>需求人数：${data[dataName].text[i].rs}名</span><time>${data.formateDate(data[dataName].text[i].sj)}</time></a>
-                    <p><span class="text">${data[dataName].text[i].info[0].l.join('')}</span><a href="javascript:;">查看详情>></a></p>
+                    <p><span class="text">${data[dataName].text[i].info[0].l.join('')}</span>
+                    <a href="content.html?hash=${dataName}&id=${i}$page=${this.page}">查看详情>></a></p>
                 </div>
             </li>`
             }
@@ -42,6 +44,7 @@ class Recruit {
         // 点击校园招聘/社会招聘，切换内容，同时改变样式
         // 最后渲染页数
         let that = this;
+        //console.log(this)
         let leftLiOne = this.leftLi[0];
         for (let i = 0; i < this.leftLi.length; i++) {
             this.leftLi[i].onclick = function () {
@@ -49,11 +52,13 @@ class Recruit {
                 this.className = 'active';
                 leftLiOne = this;
                 that.dataName = data.list[i].lx;
+                that.page = 1;
                 that.render(data, that.dataName);
                 that.pageChange();
+                that.hashChange()
             }
         }
-        this.hashChange()
+        // this.hashChange()
     }
     pageChange() {
         // 渲染页数
@@ -62,8 +67,7 @@ class Recruit {
         let html = '';
         html = '<a href="javascript:;">&lt;</a>';
         for (let i = 0; i < this.pageNum; i++) {
-            console.log(i,this.page-1)
-            html += `<a href="javascript:;" class="${i === (this.page-1)? 'active' : ''}">${i+1}</a>`
+            html += `<a href="javascript:;" class="${i === (this.page - 1) ? 'active' : ''}">${i + 1}</a>`
         }
         html += '<a href="javascript:;">&gt;</a>';
         this.nav.innerHTML = html
@@ -77,38 +81,49 @@ class Recruit {
                     that.page--;
                 } else if (ev.target.innerHTML === '&gt;') {
                     that.page++;
-                } 
+                }
                 else {
-                    that.page = ev.target.innerHTML*1;
+                    that.page = ev.target.innerHTML * 1;
                 }
             }
             if (that.page < 1) that.page = 1;
             if (that.page > that.pageNum - 1) that.page = that.pageNum;
             that.render(data, that.dataName);
-            this.hashChange()
+            that.hashChange()
         }
     }
     hashChange() {
         this.hash = `#hash=${this.dataName}&page=${this.page}`;
         let reg = /#hash=([a-z]{2})&page=(\d+)/;
-        this.hash.replace(reg,($0,$1,$2)=>{
-            console.log($0,$1,$2)
+        this.hash.replace(reg, ($0, $1, $2) => {
+            console.log($0, $1, $2)
             this.dataName = $1;
-            if($2>this.pageNum){
+            if ($2 > this.pageNum) {
                 this.page = this.pageNum;
             }
             this.page = $2;
             window.location.hash = `#hash=${this.dataName}&page=${this.page}`;
             console.log(window.location.hash)
         })
-       
-        window.onhashchange =()=>{
-            this.leftLi.forEach((item,i,all)=>{
-                item.className = '';
-                if(this.dataName === 'sh')all[0].className = 'active';
-                if(this.dataName === 'xy')all[1].className = 'active';
+
+
+    }
+    hashEvent() {
+        window.onhashchange = () => {
+            let reg = /#hash=([a-z]{2})&page=(\d+)/;
+            window.location.hash.replace(reg, ($0, $1, $2) => {
+                this.dataName = $1;
+                if ($2 > this.pageNum) {
+                    this.page = this.pageNum;
+                }
+                this.page = $2;
             })
-            this.render(data,this.dataName);
+            this.leftLi.forEach((item, i, all) => {
+                item.className = '';
+                if (this.dataName === 'sh') all[0].className = 'active';
+                if (this.dataName === 'xy') all[1].className = 'active';
+            })
+            this.render(this.data, this.dataName);
             this.pageChange();
         }
     }
