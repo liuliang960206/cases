@@ -33,7 +33,7 @@ class Recruit {
                 <div class="list">
                     <a href=""><span class="job">职位需求：${data[dataName].text[i].zw}</span><span>需求人数：${data[dataName].text[i].rs}名</span><time>${data.formateDate(data[dataName].text[i].sj)}</time></a>
                     <p><span class="text">${data[dataName].text[i].info[0].l.join('')}</span>
-                    <a href="content.html?hash=${dataName}&id=${i}$page=${this.page}">查看详情>></a></p>
+                    <a href="content.html?hash=${dataName}&id=${i+1}$page=${this.page}">查看详情>></a></p>
                 </div>
             </li>`
             }
@@ -93,6 +93,7 @@ class Recruit {
         }
     }
     hashChange() {
+        // 当页面改变，hash值也相应的改变，
         this.hash = `#hash=${this.dataName}&page=${this.page}`;
         let reg = /#hash=([a-z]{2})&page=(\d+)/;
         this.hash.replace(reg, ($0, $1, $2) => {
@@ -105,10 +106,9 @@ class Recruit {
             window.location.hash = `#hash=${this.dataName}&page=${this.page}`;
             console.log(window.location.hash)
         })
-
-
     }
     hashEvent() {
+        // 当hash值改变，页面也相应的改变
         window.onhashchange = () => {
             let reg = /#hash=([a-z]{2})&page=(\d+)/;
             window.location.hash.replace(reg, ($0, $1, $2) => {

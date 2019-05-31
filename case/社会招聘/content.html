@@ -176,18 +176,19 @@
 				this.page = 0;
 				this.search = window.location.search;
 				this.title = document.getElementById('title')
-				this.d = data[this.hash].text[this.id];
+				this.d = data[this.hash].text[this.id];	
 				this.a = document.getElementById('a')
 				this.render();
-				this.renderDetails()
-				this.returnButton()
-			}
+				this.renderDetails();
+				// this.returnButton()
+			};
 			render() {
 				let reg = /\?search=([a-z]{2})&id=(\d+)&page=(\d+)/;
 				this.search.replace(reg, ($0, $1, $2, $3) => {
 					this.hash = $1;
 					this.id = $2;
 					this.page = $3;
+					this.a.href = 'indexList.html#hash='+this.hash+'&page='+this.page;
 					console.log($1, $2, $3);
 				})
 				if (this.d) {
@@ -230,8 +231,7 @@
 				bottom.innerHTML = html;
 			};
 			returnButton(){
-				this.page = 1
-				a.href = 'list.html#hash='+this.hash+'&page='+this.page;
+				
 			}
 		};
 		new Details();
