@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .border{
+            border: 2px solid #000;
+        }
+        .green{
+            background: green;
+        }
+        div{
+            width: 100px;
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div class="green"></div>
+    <button id="btn">点击</button>
+    <script>
+        let div = document.querySelector('.green');
+        btn.onclick = function(){
+            let res = div.classList.toggle('border');
+            console.log(res)
+        }
+    </script>
+</body>
+</html>

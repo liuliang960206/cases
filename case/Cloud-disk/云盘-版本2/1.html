@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #box {
+            width: 500px;
+            height: 500px;
+            background: #000;
+            margin: 30px auto;
+            position: relative;
+
+        }
+
+        #box1 {
+            width: 200px;
+            height: 200px;
+            background: red;
+            position: absolute;
+            left: 100px;
+            top: 100px
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <div id="box1"></div>
+    </div>
+</body>
+<script type="text/javascript">
+
+    let tools = (function () {
+
+        function position(ele) {
+            let obj = ele,
+                top = 0, left = 0;
+            while (obj) {
+                top += obj.offsetTop + obj.clientTop;
+                left += obj.offsetLeft + obj.clientLeft;
+                obj = obj.offsetParent;
+            }
+            top -= ele.clientTop;
+            left -= ele.clientLeft;
+            return { top, left }
+        }
+
+        return {
+            position
+        }
+    })()
+
+    // tools(position)
+    
+    let { position } = tools;
+    (function () {
+        let { top } = position(box1)
+        console.log(top)
+        // console.log(top);
+    })();
+
+
+</script>
+
+</html>

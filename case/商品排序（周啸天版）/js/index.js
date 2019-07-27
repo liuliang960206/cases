@@ -13,6 +13,7 @@ let productList = listBox.getElementsByTagName('li');
         };
     };
     xhr.send(null); 
+    
     console.log(typeof productData); 
     productData = JSON.parse(productData);
     let str = ``;
